@@ -1,10 +1,9 @@
-var lib = require('./lib');
-var errors = require('./errors');
 var format = require('util').format;
 
-exports.attach = function attach( Sqz, db, model, imports, opts ) {
+exports.attach = function( model, config ) {
 
-    var utils = imports.utils;
+    var Sqz = model.Sqz;
+    var db = model.db;
 
     model.Image = db.define('Image', {
         /**
@@ -27,28 +26,12 @@ exports.attach = function attach( Sqz, db, model, imports, opts ) {
     },
     {
         classMethods: {
-            findWithKey: function( agent, key ) {
-                var where = agent.applyDomain({ LibraryItemKey: key });
-                return model.Image.findOne({ where: where });
-            },
             findWithSourceURI: function( agent, uri ) {
                 var where = agent.applyDomain({ sourceURI: uri });
                 return model.Image.findOne({ where: where });
             }
         },
         instanceMethods: {
-            /**
-             * Return a promise resolving to a JSON representing of the data, including joined data.
-             * TODO: Review need for these methods - using find() with includes should be sufficient?
-             */
-            toJSONPromise: function() {
-                var content = this.toJSON();
-                return this.getLibraryItem()
-                .then(function( libItem ) {
-                    content.libraryItem = libItem.toJSON();
-                    return content;
-                });
-            },
             /**
              * Get meta data for this image. Requires the content service to have been resolved by the
              * model service.
@@ -62,11 +45,4 @@ exports.attach = function attach( Sqz, db, model, imports, opts ) {
             }
         }
     });
-
-    if( model.LibaryItem ) {
-        model.Image.belongsTo( model.LibraryItem );
-        model.Image.sync();
-        model.LibraryItem.sync();
-    }
-
 }

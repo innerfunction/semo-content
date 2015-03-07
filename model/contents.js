@@ -1,10 +1,9 @@
-var lib = require('./lib');
-var errors = require('./errors');
 var format = require('util').format;
 
-exports.attach = function attach( Sqz, db, model, imports, opts ) {
+exports.attach = function( model, config ) {
 
-    var utils = imports.utils;
+    var Sqz = model.Sqz;
+    var db = model.db;
 
     model.Content = db.define('Content', {
         /**
