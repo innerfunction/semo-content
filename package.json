@@ -1,0 +1,14 @@
+{
+    "name":"semo-content",
+    "private":true,
+    "version":"0.0.8",
+    "dependencies":{
+        "log4js":">=0.6.21",
+        "mime":">=1.2.6",
+        "q":">=1.1.1",
+        "semo-utils":"git://github.com/innerfunction/semo-utils.git",
+        "temp":">=0.8.1",
+        "wkhtmltoimage":">=0.1.3",
+        "wkhtmltopdf":">=0.1.5"
+    }
+}

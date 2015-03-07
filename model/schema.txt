@@ -1,0 +1,60 @@
+Account
+============
+id *
+type
+domainID
+username
+password
+salt
+role
+name
+email
+slug
+status
+DomainID      <- Account.id (Domain) [check this]
+
+LibraryItem         
+============
+key *
+domainID
+type                
+name                
+description         
+tags
+status
+
+Content
+============
+uri *
+domainID
+baseURI
+hash
+data
+mimeType
+
+Image
+============
+id *
+domainID
+contentURI      -> Content.uri [resolved through content system]
+sourceURI
+LibraryItemKey  => LibraryItem.key
+
+Document
+============
+id *
+domainID
+slug
+templateID
+themeID
+contentData
+metaData
+publishStatus
+LibraryItemKey  => LibraryItem.key
+
+Snippet
+============
+id *
+domainID
+contentData
+LibraryItemKey  => LibraryItem.key

@@ -1,0 +1,9 @@
+{
+    "name": "model",
+    "version": "0.0.1",
+    "private": true,
+    "plugin": {
+        "consumes": ["hub","utils"],
+        "provides": ["model"]
+    }
+}
